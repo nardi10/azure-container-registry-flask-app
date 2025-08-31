@@ -1,0 +1,22 @@
+variable "resource_group_name" {
+  type    = string
+  default = "rg-projeto-acr"
+}
+
+variable "location" {
+  type    = string
+  default = "eastus"
+}
+
+variable "acr_name" {
+  type    = string
+  default = "meuacrterraform01"
+}
+
+variable "tags" {
+  type = map(string)
+  default = {
+    "ambiente" = "lab"
+    "projeto"  = "acr-terraform"
+  }
+}
