@@ -16,7 +16,7 @@ variable "acr_name" {
 variable "tags" {
   type = map(string)
   default = {
-    "ambiente" = "lab"
+    "ambiente" = "lab2"
     "projeto"  = "acr-terraform"
   }
 }
