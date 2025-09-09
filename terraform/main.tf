@@ -28,7 +28,7 @@ resource "azurerm_app_service" "app" {
   app_service_plan_id = azurerm_service_plan.plan.id
 
   site_config {
-    linux_fx_version = "DOCKER|${azurerm_container_registry.acr.login_server}/projeto1:v4"
+    linux_fx_version = "DOCKER|${azurerm_container_registry.acr.login_server}/projeto1:${var.docker_image_tag}"
   }
 
   app_settings = {

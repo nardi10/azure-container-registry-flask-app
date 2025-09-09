@@ -49,3 +49,19 @@ jobs:
           ACR_LOGIN_SERVER=$(az acr show -n $ACR_NAME --query loginServer -o tsv)
           docker build -t $ACR_LOGIN_SERVER/$IMAGE_NAME:${{ steps.vars.outputs.TAG }} .
           docker push $ACR_LOGIN_SERVER/$IMAGE_NAME:${{ steps.vars.outputs.TAG }}
+        
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.5
+        
+      - name: Terraform init
+        run: terraform -chdir=terraform init -input=false
+
+      - name: Terraform plan
+        run: terraform -chdir=terraform plan -var "docker_image_tag=${{ steps.vars.outputs.TAG }}" -out tfplan -input=false
+      
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform -chdir=terraform apply -auto-approve tfplan
+

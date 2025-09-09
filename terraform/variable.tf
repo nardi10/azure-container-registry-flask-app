@@ -20,3 +20,8 @@ variable "tags" {
     "projeto"  = "acr-terraform"
   }
 }
+
+variable "docker_image_tag" {
+  type    = string
+  default = "latest"
+}
