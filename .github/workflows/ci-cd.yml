@@ -44,4 +44,8 @@ jobs:
       - name: ACR Login (token via az)
         run: az acr login --name $ACR_NAME
 
-  
+      - name: Build e Push Docker
+        run: |
+          ACR_LOGIN_SERVER=$(az acr show -n $ACR_NAME --query loginServer -o tsv)
+          docker build -t $ACR_LOGIN_SERVER/$IMAGE_NAME:${{ steps.vars.outputs.TAG }} .
+          docker push $ACR_LOGIN_SERVER/$IMAGE_NAME:${{ steps.vars.outputs.TAG }}
