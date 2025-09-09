@@ -36,4 +36,12 @@ jobs:
       
       - name: Test Azure CLI
         run: az account show
+
+      - name: Definir TAGcurta
+        id: vars
+        run: echo "TAG=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+
+      - name: ACR Login (token via az)
+        run: az acr login --name $ACR_NAME
+
   
