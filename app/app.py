@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello, Docker + Azure!"
+    return "Hello, Docker + Azure"
 
 @app.route("/status")
 def status():
